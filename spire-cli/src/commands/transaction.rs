@@ -74,8 +74,8 @@ pub enum Type {
 impl From<Type> for TxType {
     fn from(wrapper: Type) -> Self {
         match wrapper {
-            Type::Zero => TxType::Zero,
-            Type::One => TxType::One,
+            Type::Zero => Self::Zero,
+            Type::One => Self::One,
         }
     }
 }
