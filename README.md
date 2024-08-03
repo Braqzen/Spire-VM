@@ -29,7 +29,7 @@ It implements `rocksdb` for its backend to store state, specifically:
 
 The CLI consumes the SDK and exposes an API for the following:
 
-- Querying or setting the balance of a user
+- Querying and setting the balance of a user
 - Validating signature recovery
 - Executing a transaction to update state, specifically:
   - Minting for a single user
