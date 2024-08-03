@@ -4,7 +4,7 @@ use crate::commands::{
 use clap::{Args, Parser, Subcommand};
 
 #[derive(Parser)]
-#[command(about = "TODO")]
+#[command(about = "Tool for interacting with the Spite VM")]
 pub(crate) struct Cli {
     #[command(subcommand)]
     pub(crate) command: Command,
@@ -12,12 +12,15 @@ pub(crate) struct Cli {
 
 #[derive(Clone, Subcommand)]
 pub(crate) enum Command {
+    /// Set or view the balance of an account
     #[clap(short_flag = 'B')]
     Balance(Balance),
 
+    /// Check signature validity
     #[clap(short_flag = 'S')]
     Signature(Signature),
 
+    /// Execute a regular or raw transaction
     #[clap(short_flag = 'T')]
     Transaction(Transaction),
 }

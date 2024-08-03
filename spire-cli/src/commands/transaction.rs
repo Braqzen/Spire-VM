@@ -4,38 +4,47 @@ use spire_sdk::{Bytes32, SPVMTransaction, TransactionContent, TxType, SPVM};
 
 #[derive(Clone, Subcommand)]
 pub(crate) enum TransactionCommands {
+    /// Execute a transaction in SPVM format
     #[clap(short_flag = 'E')]
     Execute(ExecuteCommand),
 
+    /// Execute a transaction directly from Bytes
     #[clap(short_flag = 'R')]
     ExecuteRaw(ExecuteRawCommand),
 }
 
 #[derive(Args, Clone)]
-#[command(about = "TODO")]
 pub(crate) struct ExecuteCommand {
+    /// User account
     #[clap(short, long)]
     pub(crate) from: Address,
 
+    /// Type of transaction: mint or transfer
+    ///
+    /// Encoded as Zero (mint) and One (transfer)
     #[clap(short, long)]
     pub(crate) tx_type: Type,
 
-    #[clap(short, long)]
+    /// Transaction parameters encoded as bytes
+    #[clap(short = 'p', long)]
     pub(crate) tx_param: Bytes,
 
+    /// User nonce
     #[clap(short, long)]
     pub(crate) nonce: u32,
 
-    #[clap(short, long)]
+    /// Transaction hash
+    #[clap(short = 'x', long)]
     pub(crate) transaction_hash: Bytes32,
 
+    /// User signature
     #[clap(short, long)]
     pub(crate) signature: Bytes,
 }
 
 #[derive(Args, Clone)]
-#[command(about = "TODO")]
 pub(crate) struct ExecuteRawCommand {
+    /// Transaction encoded into raw bytes
     #[clap(short, long)]
     pub(crate) transaction: Bytes,
 }

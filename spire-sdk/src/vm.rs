@@ -25,10 +25,10 @@ impl SPVM {
     pub fn set_balance(
         &mut self,
         ticker: &String,
-        holder: &Address,
+        account: &Address,
         balance: u16,
     ) -> anyhow::Result<()> {
-        let key = create_concatenated_key(ticker, holder);
+        let key = create_concatenated_key(ticker, account);
 
         self.db.put(ticker.as_bytes(), &[1]);
         self.db.put(&key[..], &balance.to_be_bytes());
@@ -36,8 +36,8 @@ impl SPVM {
         Ok(())
     }
 
-    pub fn balance(&self, ticker: &String, holder: &Address) -> anyhow::Result<u16> {
-        let key = create_concatenated_key(ticker, holder);
+    pub fn balance(&self, ticker: &String, account: &Address) -> anyhow::Result<u16> {
+        let key = create_concatenated_key(ticker, account);
         let value = self.db.get(&key)?;
 
         match value {
@@ -81,15 +81,15 @@ impl SPVM {
             }
         }
 
-        let holder = tx_content.from.to_vec();
+        let account = tx_content.from.to_vec();
 
-        match self.db.get(&holder)? {
+        match self.db.get(&account)? {
             Some(value) => {
                 let mut nonce = u32::from_be_bytes([value[0], value[1], value[2], value[3]]);
                 nonce += 1;
-                self.db.put(&holder, &nonce.to_be_bytes()[..]);
+                self.db.put(&account, &nonce.to_be_bytes()[..]);
             }
-            None => self.db.put(&holder, &1u32.to_be_bytes()[..]),
+            None => self.db.put(&account, &1u32.to_be_bytes()[..]),
         }
 
         Ok(())

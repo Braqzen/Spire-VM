@@ -4,20 +4,23 @@ use spire_sdk::{Bytes32, SPVM};
 
 #[derive(Clone, Subcommand)]
 pub(crate) enum SignatureCommands {
+    /// Validate a signature against a signer and message hash
     #[clap(short_flag = 'V')]
     Validate(ValidateCommand),
 }
 
 #[derive(Args, Clone)]
-#[command(about = "TODO")]
 pub(crate) struct ValidateCommand {
+    /// keccak256 hash of a message
     #[clap(short, long)]
     pub(crate) message_hash: Bytes32,
 
+    /// User signature
     #[clap(short, long)]
     pub(crate) signature: Bytes,
 
-    #[clap(short, long)]
+    /// Address to recover against
+    #[clap(short = 'a', long)]
     pub(crate) signer: Address,
 }
 
