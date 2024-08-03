@@ -16,9 +16,9 @@ pub struct SPVM {
 }
 
 impl SPVM {
-    pub fn new() -> anyhow::Result<Self> {
+    pub fn new(path: String) -> anyhow::Result<Self> {
         Ok(Self {
-            db: Database::new("".to_string())?,
+            db: Database::new(path)?,
         })
     }
 

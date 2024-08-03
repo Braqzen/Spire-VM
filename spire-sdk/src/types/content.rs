@@ -3,6 +3,7 @@ use alloy::primitives::{Address, Bytes};
 use anyhow::bail;
 use ethabi::{decode, encode, ParamType, Token};
 
+#[derive(Clone)]
 pub struct TransactionContent {
     pub(crate) from: Address,
     pub(crate) tx_type: TxType, // only first 2 bits used
@@ -10,6 +11,18 @@ pub struct TransactionContent {
     pub(crate) nonce: u32,
 }
 
+impl TransactionContent {
+    pub fn new(from: &Address, tx_type: &TxType, tx_param: &Bytes, nonce: u32) -> Self {
+        Self {
+            from: *from,
+            tx_type: tx_type.clone(),
+            tx_param: tx_param.clone(),
+            nonce,
+        }
+    }
+}
+
+#[derive(Clone)]
 pub enum TxType {
     Zero,
     One,
