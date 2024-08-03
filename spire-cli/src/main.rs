@@ -11,11 +11,14 @@ use spire_sdk::SPVM;
 fn main() -> anyhow::Result<()> {
     let cli = Cli::parse();
 
-    let database_path = std::fs::canonicalize("../rocksdb")?
-        .as_path()
+    let mut canonical_path = std::path::PathBuf::from(std::env::current_dir()?);
+    canonical_path.push("rocksdb");
+
+    let database_path = canonical_path
         .to_str()
         .expect("Failed character encoding in path.")
-        .into();
+        .to_string();
+
     let mut vm = SPVM::new(database_path)?;
 
     match cli.command {
