@@ -60,8 +60,8 @@ To interact with the `VM` use the `CLI` to submit commands.
 > Note: Only balance has been tested hence the concrete command examples for it
 
 ```bash
-./target/debug/spire-cli --balance \ 
-    --set \
+./target/debug/spire-cli balance \
+    set \
     --ticker eth \
     --balance 13 \
     --account 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48
@@ -70,8 +70,8 @@ To interact with the `VM` use the `CLI` to submit commands.
 #### Get Balance
 
 ```bash
-./target/debug/spire-cli --balance \
-    --view \
+./target/debug/spire-cli balance \
+    view \
     --ticker eth \
     --account 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48
 ```
@@ -79,8 +79,8 @@ To interact with the `VM` use the `CLI` to submit commands.
 #### Check Signature Validity
 
 ```bash
-./target/debug/spire-cli --signature \
-    --validate \
+./target/debug/spire-cli signature \
+    validate \
     --message-hash <MESSAGE_HASH> \
     --signature <SIGNATURE> \
     --signer <SIGNER>
@@ -89,8 +89,8 @@ To interact with the `VM` use the `CLI` to submit commands.
 #### Execute Transaction
 
 ```bash
-./target/debug/spire-cli --transaction \
-    --execute \
+./target/debug/spire-cli transaction \
+    execute \
     --from <FROM> \
     --tx-type <TX_TYPE> \
     --tx-param <TX_PARAM> \
@@ -102,7 +102,7 @@ To interact with the `VM` use the `CLI` to submit commands.
 #### Execute Raw Transaction
 
 ```bash
-./target/debug/spire-cli --transaction \
-    --execute-raw \
+./target/debug/spire-cli transaction \
+    execute-raw \
     --transaction <TRANSACTION>
 ```
